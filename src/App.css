@@ -1,0 +1,138 @@
+.container {
+  padding: 20px;
+}
+
+.container h1 {
+  padding: 20px;
+  color: #5a736d;
+}
+
+.add {
+  display: block;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #5a736d;
+  width: 220px;
+  margin: 20px;
+  padding: 10px;
+}
+
+.search {
+  padding: 10px;
+  display: flex;
+}
+
+.search p {
+  color: #7ea497;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.search input {
+  margin: 10px;
+  padding: 10px;
+  width: 300px;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #5a736d;
+  font-size: 20px;
+  flex-grow: 1;
+  color: white;
+  height: 30px;
+}
+
+tr {
+  text-align: center;
+  font-size: 18px;
+  height: 45px;
+}
+
+tr:nth-child(odd) {
+  background-color: #f0f0f3;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+}
+
+.go-to-btn {
+  border: none;
+  background-color: #8fbdb3;
+  margin: 2px;
+  color: white;
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.btn {
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.active {
+  font-weight: bold;
+  cursor: not-allowed;
+}
+
+label{
+  cursor: pointer;
+  display: inline-block;
+  padding: 3px;
+  text-align: right;
+  width: 150px;
+  vertical-align: top;
+  font-size: 20px;
+}
+
+input{
+  font-size: inherit;
+}
+
+input[type=submit] {
+  background-color: #7ea497;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 20px;
+}
+
+.edit {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #8fbdb3;
+  border-radius: 4px;
+  opacity: 0.8;
+  width: 90px;
+  height: 30px;
+}
+
+.delete {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #8fbdb3;
+  border-radius: 4px;
+  opacity: 0.8;
+  width: 110px;
+  height: 30px;
+}
