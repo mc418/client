@@ -71,9 +71,21 @@ class Display extends React.Component {
             }
         })
         .then(response => {
-            this.setState({ 
-                // reload: true,
-                data: response.data.data
+            this.setState((prevState, props) => ({
+                reload: true
+            }),() => {
+                axios({
+                    method: 'get', 
+                    url: 'http://localhost:3001/api/getData',
+                })
+                .then(response => {
+                    this.setState({
+                        data: response.data.data
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                })
             });
         })
         .catch(err => {
@@ -141,11 +153,12 @@ class Display extends React.Component {
                                     </button>
                                 </th>
                             </tr>
-                            {this.state.pageOfItems.map(item => 
-                                <User user={item} handleDelete={this.onClickDelete} />
+                            {this.state.pageOfItems.map((item, index) => 
+                                <User key={index} user={item} handleDelete={this.onClickDelete} />
                             )}
                         </tbody>
                     </table>
+                    {/* <Page items={data} /> */}
                     <Pagination items={data} onChangePage={this.onChangePage} />
                 </div>
             </div>

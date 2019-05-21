@@ -9,7 +9,7 @@ class Add extends React.Component {
         this.state = {
             firstname: '',
             lastname: '',
-            sex: '',
+            sex: 'Male',
             age: '',
             password: '',
             repeat: '',
@@ -72,14 +72,17 @@ class Add extends React.Component {
     }
 
     render() {
+        let regex = /^[A-Z][a-z]+$/;
         const { firstname, lastname, age, sex, password, repeat, redirectToReferrer} = this.state;
-        const disabled = !(firstname !== '' 
-                            && lastname !== '' 
-                            && age !== '' 
-                            && sex !== '' 
-                            && password !== '' 
-                            && repeat !== '' 
-                            && password === repeat);
+        const disabled = firstname === '' 
+                        || lastname === '' 
+                        || age === '' 
+                        || sex === '' 
+                        || password === '' 
+                        || repeat === '' 
+                        || password !== repeat
+                        || !regex.test(firstname)
+                        || !regex.test(lastname);
         if (redirectToReferrer) {
             return <Redirect to='/' />
         } else {
@@ -87,52 +90,63 @@ class Add extends React.Component {
                 <div className="container">
                     <h1>Create New User</h1>
                     <form onSubmit={this.handleSubmit}>
-                        <p>
+                        <div>
                             <label>First Name:</label>
                             <input 
                                 type="text" 
                                 name="firstname" 
                                 onChange={this.handleFirstName}  
                             />
-                        </p>
+                            <p style={
+                                {display:(regex.test(firstname) || firstname==='') 
+                                ? 
+                                "none" : "inline", color: "red"}
+                                }
+                            >Incorrect form of first name</p>
+                        </div>
                         <br/>
-                        <p>
+                        <div>
                             <label>Last Name:</label>
                             <input 
                                 type="text"
                                 name="lastname"
                                 onChange={this.handleLastName}
                             />
-                        </p>
+                            <p style={
+                                {display:(regex.test(lastname) || lastname==='') 
+                                ? 
+                                "none" : "inline", color: "red"}
+                                }
+                            >Incorrect form of last name</p>
+                        </div>
                         <br/>
-                        <p>
+                        <div>
                             <label>Age:</label>
                             <input 
-                                type="text" 
+                                type="number" 
                                 name="age" 
                                 onChange={this.handleAge} 
                             />
-                        </p>
+                        </div>
                         <br/>
-                        <p>
+                        <div>
                             <label>Sex:</label>
-                            <input 
-                                type="text" 
-                                name="sex" 
-                                onChange={this.handleSex} 
-                            />
-                        </p>
+                            <select value={this.state.sex} onChange={this.handleSex}>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
                         <br/>
-                        <p>
+                        <div>
                             <label>Password:</label> 
                             <input 
                                 type="password" 
                                 name="password" 
                                 onChange={this.handlePassword} 
                             />
-                        </p>
+                        </div>
                         <br/>
-                        <p>
+                        <div>
                             <label>Repeat:</label> 
                             <input 
                                 type="password" 
@@ -142,10 +156,10 @@ class Add extends React.Component {
                             <p style={
                                 {display:(password===repeat || password==='' || repeat==='') 
                                 ? 
-                                "none" : "inline-block"}
+                                "none" : "inline", color: "red"}
                                 }
-                            >Doesn't match</p>
-                        </p>
+                            >Password doesn't match</p>
+                        </div>
                         <br/>
                         <input type="submit" value="Submit" disabled={disabled} />
                     </form>

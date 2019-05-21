@@ -90,20 +90,23 @@ class Edit extends React.Component {
     }
 
     render() {
+        let regex = /^[A-Z][a-z]+$/;
         const { firstname, lastname, age, sex, password, originPassword, redirectToReferrer} = this.state;
-        const disabled = !(firstname !== '' 
-                            && lastname !== '' 
-                            && age !== '' 
-                            && sex !== '' 
-                            && password !== '' 
-                            && originPassword === password);
+        const disabled = firstname === '' 
+            || lastname === '' 
+            || age === '' 
+            || sex === '' 
+            || password === '' 
+            || password !== originPassword
+            || !regex.test(firstname)
+            || !regex.test(lastname);
         if (redirectToReferrer) {
             return <Redirect to='/' />
         } else return (
             <div className="container">
                 <h1>Edit User</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <p>
+                    <div>
                         <label>First Name:</label>
                         <input 
                             type="text" 
@@ -111,9 +114,15 @@ class Edit extends React.Component {
                             onChange={this.handleFirstName}
                             value={firstname}  
                         />
-                    </p>
+                        <p style={
+                                {display:(regex.test(firstname) || firstname==='') 
+                                ? 
+                                "none" : "inline", color: "red"}
+                                }
+                            >Incorrect form of first name</p>
+                    </div>
                     <br/>
-                    <p>
+                    <div>
                         <label>Last Name:</label>
                         <input 
                             type="text"
@@ -121,29 +130,33 @@ class Edit extends React.Component {
                             onChange={this.handleLastName}
                             value={lastname}
                         />
-                    </p>
+                        <p style={
+                                {display:(regex.test(lastname) || lastname==='') 
+                                ? 
+                                "none" : "inline", color: "red"}
+                                }
+                            >Incorrect form of last name</p>
+                    </div>
                     <br/>
-                    <p>
+                    <div>
                         <label>Age:</label>
                         <input 
-                            type="text" 
+                            type="number" 
                             name="age" 
                             onChange={this.handleAge} 
                             value={age}
                         />
-                    </p>
+                    </div>
                     <br/>
-                    <p>
+                    <div>
                         <label>Sex:</label>
-                        <input 
-                            type="text" 
-                            name="sex" 
-                            onChange={this.handleSex} 
-                            value={sex}
-                        />
-                    </p>
+                        <select value={this.state.sex} onChange={this.handleSex}>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
                     <br/>
-                    <p>
+                    <div>
                         <label>Password:</label> 
                         <input 
                             type="password" 
@@ -151,12 +164,12 @@ class Edit extends React.Component {
                             onChange={this.handlePassword} 
                         />
                          <p style={
-                            {display:(password===originPassword || password==='') 
-                            ? 
-                            "none" : "inline-block"}
-                            }
-                        >Doesn't match record</p>
-                    </p>
+                                {display:(password===originPassword || password==='') 
+                                ? 
+                                "none" : "inline", color: "red"}
+                                }
+                            >Password doesn't match</p>
+                    </div>
                     <br/>
                     <br/>
                     <input className="submit" type="submit" value="Submit" disabled={disabled} />
