@@ -9,25 +9,7 @@ class User extends React.Component {
             redirectToHome: false
         }
     }
-    // onClickDelete = e => {
-    //     var objectIdToDelete = this.props.user._id;
-    //     axios({
-    //         method: 'delete', 
-    //         url: 'http://localhost:3001/api/deleteData',
-    //         data: {
-    //             id : objectIdToDelete
-    //         }
-    //     })
-    //     .then(response => {
-    //         this.setState({
-    //             redirectToHome: !this.state.redirectToHome
-    //         });
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     })
-    //     e.preventDefault();
-    // }
+
     render() {
         const { user } = this.props;
         return (

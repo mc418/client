@@ -136,3 +136,9 @@ input[type=submit] {
   width: 110px;
   height: 30px;
 }
+
+.sort-btn {
+  border: none;
+  background: none;
+  color: white;
+}
