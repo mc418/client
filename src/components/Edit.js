@@ -26,7 +26,6 @@ class Edit extends React.Component {
             }
         })
         .then(response => {
-            console.log(response.data)
             this.setState({
                 firstname: response.data.data.firstName,
                 lastname: response.data.data.lastName,

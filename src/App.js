@@ -11,7 +11,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route exact={true} path='/' component={Home} />
-          <Route path='/add/:userId' component={Add} />
+          <Route path='/add' component={Add} />
           <Route path='/edit/:userId' component={Edit} />
         </Switch>
       </BrowserRouter>

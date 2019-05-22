@@ -50,8 +50,7 @@ class Add extends React.Component {
                 lastName: this.state.lastname,
                 age: this.state.age,
                 sex: this.state.sex,
-                password: this.state.password,
-                id: this.props.match.params.userId
+                password: this.state.password
             }    
         })
         .then(response => {
@@ -73,7 +72,13 @@ class Add extends React.Component {
 
     render() {
         let regex = /^[A-Z][a-z]+$/;
-        const { firstname, lastname, age, sex, password, repeat, redirectToReferrer} = this.state;
+        const { firstname, 
+                lastname, 
+                age, 
+                sex, 
+                password, 
+                repeat, 
+                redirectToReferrer} = this.state;
         const disabled = firstname === '' 
                         || lastname === '' 
                         || age === '' 

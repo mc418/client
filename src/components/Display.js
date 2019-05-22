@@ -31,30 +31,28 @@ class Display extends React.Component {
         })
     }
 
-    handleChange = (e) => {
-        e.persist();
-        this.setState((prevState, props) => ({
-            searchString: e.target.value
-        }))
-        this.setState((prevState, props) => ({
-            reload: true
-        }),() => {
+    handleSearch = (value) => {
             axios({
                 method: 'get', 
                 url: 'http://localhost:3001/api/getData',
                 params: {
-                    search: this.state.searchString
+                    search: value
                 }
             })
             .then(response => {
-                this.setState({
-                    data: response.data.data
+                this.setState(() => {
+                    return {
+                    searchString: value,
+                    data: response.data.data,
+                }}, () => {
+                    console.log(this.state.searchString);
+                    console.log(this.state.data);
                 });
+                
             })
             .catch(err => {
                 console.log(err);
             })
-        });
     }
 
     onChangePage = pageOfItems => {
@@ -71,9 +69,6 @@ class Display extends React.Component {
             }
         })
         .then(response => {
-            this.setState((prevState, props) => ({
-                reload: true
-            }),() => {
                 axios({
                     method: 'get', 
                     url: 'http://localhost:3001/api/getData',
@@ -86,7 +81,6 @@ class Display extends React.Component {
                 .catch(err => {
                     console.log(err);
                 })
-            });
         })
         .catch(err => {
             console.log(err);
@@ -122,7 +116,7 @@ class Display extends React.Component {
                     <input 
                         type="text" 
                         value={this.state.searchString} 
-                        onChange={this.handleChange} 
+                        onChange={e => this.handleSearch(e.target.value)} 
                         placeholder="Type here..." 
                     />
                 </div>
@@ -158,7 +152,6 @@ class Display extends React.Component {
                             )}
                         </tbody>
                     </table>
-                    {/* <Page items={data} /> */}
                     <Pagination items={data} onChangePage={this.onChangePage} />
                 </div>
             </div>
